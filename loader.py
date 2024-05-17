@@ -5,6 +5,32 @@
 import wget
 import os
 import time
+import socket
+
+def online_update():
+    #get remote version info
+    url = 'https://raw.githubusercontent.com/data3rr0r/night_study_tag/main/.server_version'
+    if os.path.exists('.server_version'):
+        os.remove('.server_version')
+    wget.download(url, '.server_version')
+    with open('.server_version', 'r') as f:
+        remote_version = float(f.read())
+        
+    time.sleep(1)
+    print(f"\n최신 버전: {remote_version}")
+    time.sleep(1)
+
+    if remote_version > local_version:
+        print(f"새로운 버전({remote_version}) 발견됨. 업데이트중...")
+        url = 'https://raw.githubusercontent.com/data3rr0r/night_study_tag/main/night_study_interactive.py'
+        if os.path.exists('night_study_interactive.py'):
+            os.remove('night_study_interactive.py')
+        wget.download(url, 'night_study_interactive.py')
+        print("\n업데이트 완료.")
+        with open('.version', 'w') as f:
+            f.write(str(remote_version))
+    else:
+        print("이미 최신 버전을 사용중입니다.")
 
 # Print Title
 print("야간자율학습 출석 시스템 로더 v1.0")
@@ -25,33 +51,18 @@ else:
 time.sleep(1)
 print(f"\n현재 버전: {local_version}")
 
-#get remote version info
-url = 'https://raw.githubusercontent.com/data3rr0r/night_study_tag/main/.server_version'
-if os.path.exists('.server_version'):
-    os.remove('.server_version')
-wget.download(url, '.server_version')
-with open('.server_version', 'r') as f:
-    remote_version = float(f.read())
-    
+# Check internet connection
+print("인터넷 연결 확인 중...")
 time.sleep(1)
-print(f"\n최신 버전: {remote_version}")
-time.sleep(1)
-
-if remote_version > local_version:
-    print(f"새로운 버전({remote_version}) 발견됨. 업데이트중...")
-    url = 'https://raw.githubusercontent.com/data3rr0r/night_study_tag/main/night_study_interactive.py'
-    if os.path.exists('night_study_interactive.py'):
-        os.remove('night_study_interactive.py')
-    wget.download(url, 'night_study_interactive.py')
-    print("\n업데이트 완료.")
-    with open('.version', 'w') as f:
-        f.write(str(remote_version))
-else:
-    print("이미 최신 버전을 사용중입니다.")
+try:
+    socket.create_connection(('www.google.com', 80))
+    print("인터넷 연결 확인됨.")
+    online_update()
+except OSError:
+    print("인터넷 연결이 확인되지 않았습니다. 인터넷 연결을 확인하십시오. 업데이트 확인 없이 시스템을 시작합니다.")
     
 
 time.sleep(3)
 print("시스템 시작 중...")
 time.sleep(5)
 os.system('python3 night_study_interactive.py')
-
