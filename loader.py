@@ -11,6 +11,13 @@ print("야간자율학습 출석 시스템 로더 v1.0")
 # Get local version info, create .version if not exists, otherwise read the version
 if not os.path.exists('.version'):
     local_version = float(0)
+    print('최초 실행입니다. 비밀번호를 입력하여 프로그램에 실행한 라이브러리를 다운받으십시오. 인터넷 연결이 도중에 끊기지 않도록 안정적인 온라인 환경에서 진행하십시오.')
+    os.system('sudo apt update')
+    os.system('sudo apt install -y python3-pip')
+    os.system('pip install getch')
+    os.system('pip install datetime')
+    os.system('pip install time')
+    os.system('pip install wget')
 else:
     with open('.version', 'r') as f:
         local_version = float(f.read())
@@ -33,7 +40,8 @@ time.sleep(1)
 if remote_version > local_version:
     print(f"새로운 버전({remote_version}) 발견됨. 업데이트중...")
     url = 'https://raw.githubusercontent.com/data3rr0r/night_study_tag/main/night_study_interactive.py'
-    os.remove('night_study_interactive.py')
+    if os.path.exists('night_study_interactive.py):
+        os.remove('night_study_interactive.py')
     wget.download(url, 'night_study_interactive.py')
     print("\n업데이트 완료.")
     with open('.version', 'w') as f:
