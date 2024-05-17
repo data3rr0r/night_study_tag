@@ -2,13 +2,30 @@
 # Do not execute interactive.py directly, use loader.py instead
 # make sure to automatically load this file from bashrc
 
-import wget
 import os
 import time
 import socket
 
+
+# Print Title
+print("야간자율학습 출석 시스템 로더 v1.0")
+# Get local version info, create .version if not exists, otherwise read the version
+if not os.path.exists('.version'):
+    local_version = float(0)
+    print('최초 실행입니다. 비밀번호를 입력하여 프로그램에 실행한 라이브러리를 다운받으십시오. 인터넷 연결이 도중에 끊기지 않도록 안정적인 온라인 환경에서 진행하십시오.')
+    os.system('sudo apt update')
+    os.system('sudo apt install -y python3-pip')
+    os.system('pip install getch')
+    os.system('pip install datetime')
+    os.system('pip install time')
+    os.system('pip install wget')
+else:
+    with open('.version', 'r') as f:
+        local_version = float(f.read())
+
 def online_update():
     #get remote version info
+    import wget
     url = 'https://raw.githubusercontent.com/data3rr0r/night_study_tag/main/.server_version'
     if os.path.exists('.server_version'):
         os.remove('.server_version')
@@ -32,22 +49,6 @@ def online_update():
     else:
         print("이미 최신 버전을 사용중입니다.")
 
-# Print Title
-print("야간자율학습 출석 시스템 로더 v1.0")
-# Get local version info, create .version if not exists, otherwise read the version
-if not os.path.exists('.version'):
-    local_version = float(0)
-    print('최초 실행입니다. 비밀번호를 입력하여 프로그램에 실행한 라이브러리를 다운받으십시오. 인터넷 연결이 도중에 끊기지 않도록 안정적인 온라인 환경에서 진행하십시오.')
-    os.system('sudo apt update')
-    os.system('sudo apt install -y python3-pip')
-    os.system('pip install getch')
-    os.system('pip install datetime')
-    os.system('pip install time')
-    os.system('pip install wget')
-else:
-    with open('.version', 'r') as f:
-        local_version = float(f.read())
-        
 time.sleep(1)
 print(f"\n현재 버전: {local_version}")
 
@@ -60,7 +61,7 @@ try:
     online_update()
 except OSError:
     print("인터넷 연결이 확인되지 않았습니다. 인터넷 연결을 확인하십시오. 업데이트 확인 없이 시스템을 시작합니다.")
-    
+
 
 time.sleep(3)
 print("시스템 시작 중...")
