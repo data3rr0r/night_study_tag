@@ -47,5 +47,8 @@ loader.py 파일을 다운로드받고 적당한 위치에 저장한 다음, 터
 예시) `pip install getch`
 위에 적힌 모든 모듈에 대해 설치 명령어를 입력하십시오. 그런 다음 loader.py를 다시 시작합니다.
 
+## No module names 'smartcard.CardType' 오류 발생
+일부 환경에서 pip으로 smartcard 모듈 설치 시 설치했음에도 인식되지 않는 경우가 있습니다. 이 경우 `sudo apt install python3-pyscard` 명령어로 smartcard와 pyscard를 같이 설치하십시오.
+
 ## loader 오류 발생 시
 이 Repository에서 loader.py를 수동으로 다운로드받고 파일을 대치하십시오.
