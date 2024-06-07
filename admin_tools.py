@@ -3,6 +3,7 @@ import getch
 from datetime import datetime
 import os
 import time
+from nfc_uid import nfc_uid
 student_id=""
 
 def mainscreen():
@@ -26,19 +27,22 @@ def mainscreen():
             break
         else:    
             os.system('clear')
-            
+
 def read_card():
-    global student_id
+    global student_id, nfc_uid
     print("카드를 인식하세요.")
-    student_id = input("Enter card ID: ").strip()
+    nfc_userid = nfc_uid.NFC_UID()
+    student_id = str(nfc_userid.read())
+    del nfc_userid
     return student_id
 
 def add_new_student():
     # File names
-    student_info_file = '.studentlist.csv'
+    student_info_file = 'studentlist.csv'
     # Get Info
-    new_name = input("새 학생의 이름을 입력하십시오: ").strip()
-    new_id = input("새 학생의 카드 ID를 입력하십시오: ").strip()
+    new_name = input("새 학생의 이름을 입력하고 엔터 키를 누르십시오: ").strip()
+    print("등록할 카드를 리더기에 대십시오.")
+    new_id=read_card()
     data = [new_id, new_name]
     os.system('clear')
     print("추가할 학생 이름: ", new_name)
@@ -57,9 +61,9 @@ def add_new_student():
 def remove_student():
     
     # Get Info
-    target_name = input("삭제할 학생의 이름을 입력하십시오: ")
-    input_file = open('.studentlist.csv', 'r')
-    output_file = open('.studentlist_edit.csv', 'w+')
+    target_name = input("삭제할 학생의 이름을 입력하고 엔터 키를 누르십시오: ")
+    input_file = open('studentlist.csv', 'r')
+    output_file = open('studentlist_edit.csv', 'w+')
     os.system('clear')
     print("삭제할 학생 이름: ", target_name)
     print("위 학생과 연관된 모든 정보를 삭제합니다. 정보가 맞으면 1번을 누르십시오. 아니라면 다른 키를 누르고 메인 화면으로 돌아가 재시도하십시오.")
@@ -72,8 +76,8 @@ def remove_student():
             writer.writerow(row)
     input_file.close()
     output_file.close()
-    os.remove('.studentlist.csv')
-    os.rename('.studentlist_edit.csv', '.studentlist.csv')
+    os.remove('studentlist.csv')
+    os.rename('studentlist_edit.csv', 'studentlist.csv')
     print(f"{target_name} 학생이 삭제되었습니다.")
 
 

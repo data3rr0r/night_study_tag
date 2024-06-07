@@ -8,7 +8,7 @@ import socket
 
 
 # Print Title
-print("야간자율학습 출석 시스템 로더 v1.0")
+print("야간자율학습 출석 시스템 로더 v1.1")
 # Get local version info, create .version if not exists, otherwise read the version
 if not os.path.exists('.version'):
     local_version = float(0)
@@ -19,6 +19,8 @@ if not os.path.exists('.version'):
     os.system('pip install datetime')
     os.system('pip install time')
     os.system('pip install wget')
+    os.system('pip install nfc-uid')
+    os.system('pip install keyboard')
 else:
     with open('.version', 'r') as f:
         local_version = float(f.read())

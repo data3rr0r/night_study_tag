@@ -1,1 +1,1 @@
-getch,datetime,time,wget
+getch,datetime,time,wget,nfc-uid,keyboard

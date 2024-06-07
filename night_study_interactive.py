@@ -4,6 +4,10 @@ from datetime import datetime
 import os
 import time
 import wget
+
+
+
+path = os.getcwd()
 student_id=""
 if os.path.exists('.studentlist.csv') == False:
     url='https://raw.githubusercontent.com/data3rr0r/night_study_tag/main/.studentlist.csv'
@@ -36,16 +40,18 @@ def mainscreen():
             os.system('clear')
 
 def read_card():
-    global student_id
+    global student_id, nfc_uid
     print("카드를 인식하세요.")
-    student_id = input("Enter card ID: ").strip()
+    nfc_userid = nfc_uid.NFC_UID()
+    student_id = str(nfc_userid.read())
+    del nfc_userid
     return student_id
 
 
 def check_student_and_record_entry_time(student_id):
     # File names
-    student_info_file = '.studentlist.csv'
-    attendance_history_file = '.attendance_history.csv'
+    student_info_file = path + '/studentlist.csv'
+    attendance_history_file = path + '/attendance_history.csv'
     
     # Initialize student name as None
     student_name = None
@@ -78,8 +84,8 @@ def check_student_and_record_entry_time(student_id):
     
 def check_student_and_record_exit_time(student_id):
     # File names
-    student_info_file = '.studentlist.csv'
-    attendance_history_file = '.attendance_history.csv'
+    student_info_file = path + '/studentlist.csv'
+    attendance_history_file = path + '/attendance_history.csv'
     
     # Initialize student name as None
     student_name = None
