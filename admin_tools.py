@@ -41,11 +41,13 @@ def add_new_student():
     student_info_file = 'studentlist.csv'
     # Get Info
     new_name = input("새 학생의 이름을 입력하고 엔터 키를 누르십시오: ").strip()
+    new_number = input("새 학생의 학번을 입력하고 엔터 키를 누르십시오: ").strip()
     print("등록할 카드를 리더기에 대십시오.")
     new_id=read_card()
-    data = [new_id, new_name]
+    data = [new_id, new_number, new_name]
     os.system('clear')
     print("추가할 학생 이름: ", new_name)
+    print("추가할 학생 학번: ", new_number)
     print("추가할 학생 ID: ", new_id)
     print("위 정보로 등록합니다. 정보가 맞으면 1번을 누르십시오. 아니라면 다른 키를 누르고 메인 화면으로 돌아가 재시도하십시오.")
     key =  getch.getch()
@@ -62,11 +64,13 @@ def remove_student():
     
     # Get Info
     target_name = input("삭제할 학생의 이름을 입력하고 엔터 키를 누르십시오: ")
+    target_number = input("삭제할 학생의 학번을 입력하고 엔터 키를 누르십시오: ")
     input_file = open('studentlist.csv', 'r')
     output_file = open('studentlist_edit.csv', 'w+')
     os.system('clear')
     print("삭제할 학생 이름: ", target_name)
-    print("위 학생과 연관된 모든 정보를 삭제합니다. 정보가 맞으면 1번을 누르십시오. 아니라면 다른 키를 누르고 메인 화면으로 돌아가 재시도하십시오.")
+    print("삭제할 학생 학번: ", target_number)
+    print("위 정보로 등록된 학생의 모든 등록 정보를 삭제합니다. 정보가 맞으면 1번을 누르십시오. 아니라면 다른 키를 누르고 메인 화면으로 돌아가 재시도하십시오.")
     key =  getch.getch()
     if key != '1':
         return

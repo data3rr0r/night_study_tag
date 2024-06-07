@@ -4,7 +4,7 @@ from datetime import datetime
 import os
 import time
 import wget
-
+from nfc_uid import nfc_uid 
 
 
 path = os.getcwd()
@@ -40,7 +40,7 @@ def mainscreen():
             os.system('clear')
 
 def read_card():
-    global student_id, nfc_uid
+    global student_id
     print("카드를 인식하세요.")
     nfc_userid = nfc_uid.NFC_UID()
     student_id = str(nfc_userid.read())
@@ -61,7 +61,8 @@ def check_student_and_record_entry_time(student_id):
         reader = csv.reader(file)
         for row in reader:
             if row[0] == student_id:
-                student_name = row[1]    
+                student_name = row[2]  
+                student_number = row[1]  
     
     # Abort if student not found
     if student_name is None:
@@ -73,7 +74,7 @@ def check_student_and_record_entry_time(student_id):
     current_time_kr = datetime.now().strftime('%Y년 %m월 %d일 %H시 %M분 %S초')
     
     # Prepare the attendance record
-    attendance_record = [student_id, student_name, current_time, '입실']
+    attendance_record = [student_id, student_number, student_name, current_time, '입실']
     
     # append the record to attendance_history.csv
     with open(attendance_history_file, 'a') as file:
@@ -95,7 +96,8 @@ def check_student_and_record_exit_time(student_id):
         reader = csv.reader(file)
         for row in reader:
             if row[0] == student_id:
-                student_name = row[1]    
+                student_number = row[1]
+                student_name = row[2]    
     
     # Abort if student not found
     if student_name is None:
@@ -107,7 +109,7 @@ def check_student_and_record_exit_time(student_id):
     current_time_kr = datetime.now().strftime('%Y년 %m월 %d일 %H시 %M분 %S초')
     
     # Prepare the attendance record
-    attendance_record = [student_id, student_name, current_time, '퇴실']
+    attendance_record = [student_id, student_number, student_name, current_time, '퇴실']
     
     # append the record to attendance_history.csv
     with open(attendance_history_file, 'a') as file:
