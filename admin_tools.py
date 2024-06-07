@@ -7,13 +7,15 @@ from nfc_uid import nfc_uid
 student_id=""
 
 def mainscreen():
+    os.system('clear')
     global student_id
     while(True):
         print("관리자용 야자 출석 관리 시스템입니다.")
-        print("새 학생을 등록하려면 1번을 누르십시오.")
-        print("기존 학생을 삭제하려면 2번을 누르십시오.")
-        print("학생과 연동된 카드를 변경하려면 해당 학생에 대한 정보를 먼저 삭제하고 새로 등록하십시오.")
-        print("종료하려면 3번을 누르십시오.")
+        print("1. 새 학생 등록")
+        print("2. 기존 학생 삭제")
+        print("3. 프로그램 종료")
+        print("원하는 작업을 선택하고 엔터 키를 누르십시오.")
+        print("학생과 연동된 카드를 변경하려면 기존 학생 정보를 삭제하고 새로 등록하십시오.")
         key = getch.getch()
         if key == '1':
             add_new_student()

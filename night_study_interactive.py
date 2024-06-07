@@ -5,16 +5,17 @@ import os
 import time
 import wget
 from nfc_uid import nfc_uid 
+now_studying = []
 
 
 path = os.getcwd()
 student_id=""
-if os.path.exists('.studentlist.csv') == False:
-    url='https://raw.githubusercontent.com/data3rr0r/night_study_tag/main/.studentlist.csv'
-    wget.download(url, '.studentlist.csv')
-if os.path.exists('.attendance_history.csv') == False:
-    url='https://raw.githubusercontent.com/data3rr0r/night_study_tag/main/.attendance_history.csv'
-    wget.download(url, '.attendance_history.csv')
+if os.path.exists('studentlist.csv') == False:
+    url='https://raw.githubusercontent.com/data3rr0r/night_study_tag/main/studentlist.csv'
+    wget.download(url, 'studentlist.csv')
+if os.path.exists('attendance_history.csv') == False:
+    url='https://raw.githubusercontent.com/data3rr0r/night_study_tag/main/attendance_history.csv'
+    wget.download(url, 'attendance_history.csv')
     
 def mainscreen():
     global student_id
@@ -69,6 +70,11 @@ def check_student_and_record_entry_time(student_id):
         print(f"학생 ID {student_id}를 찾을 수 없습니다. 등록된 카드인지 확인하십시오. 오류가 지속되면 담당 교사에게 문의하십시오.")
         return
     
+    # Check if the student is already studying
+    if student_id in now_studying:
+        print(f"{student_name}님, 이미 입실하셨습니다.")
+        return
+    
     # Get current time
     current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     current_time_kr = datetime.now().strftime('%Y년 %m월 %d일 %H시 %M분 %S초')
@@ -81,6 +87,7 @@ def check_student_and_record_entry_time(student_id):
         writer = csv.writer(file)
         writer.writerow(attendance_record)
     
+    now_studying.append(student_id)
     print(f"{student_name}님, {current_time_kr}에 입실하셨습니다.")
     
 def check_student_and_record_exit_time(student_id):
@@ -104,6 +111,11 @@ def check_student_and_record_exit_time(student_id):
         print(f"학생 ID {student_id}를 찾을 수 없습니다. 등록된 카드인지 확인하십시오. 오류가 지속되면 담당 교사에게 문의하십시오.")
         return
     
+    # Abort if student is not studying
+    if student_id not in now_studying:
+        print(f"{student_name}님, 입실기록이 없습니다.")
+        return 
+    
     # Get current time
     current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     current_time_kr = datetime.now().strftime('%Y년 %m월 %d일 %H시 %M분 %S초')
@@ -116,6 +128,7 @@ def check_student_and_record_exit_time(student_id):
         writer = csv.writer(file)
         writer.writerow(attendance_record)
     
+    now_studying.remove(student_id)
     print(f"{student_name}님, {current_time_kr}에 퇴실하셨습니다.")
     
 
