@@ -8,12 +8,12 @@
 4. attendance_history.csv에 카드 UID, 학생 이름, 시각, 입퇴실 여부를 기록한다.
 
 # 설치 방법
-loader.py 파일을 다운로드받고 적당한 위치에 저장한 다음, 터미널을 열고 python3 loader.py 명령어로 실행하고, 화면의 지침에 따르십시오. 자동으로 필요한 요소들을 다운로드받습니다. 약 5~10분 가량 소요되며, 안정적인 인터넷 환경에서 실행하십시오. 
-
+loader.py 파일을 다운로드받고 적당한 위치에 저장한 다음, 터미널을 열고 python3 loader.py 명령어로 실행하고, 화면의 지침에 따르십시오. 자동으로 필요한 요소들을 다운로드받습니다. 약 5~10분 가량 소요되며, 안정적인 인터넷 환경에서 실행하십시오. 인터넷 연결이 끊긴 경우 아래의
+ "Dependency 수동 설치 방법" 섹션을 참고하여 수동으로 설치하십시오.
 # 부팅 시 자동 실행 설정
 
 
-# 파일 구조 설명
+# 파일 설명
 ## studentlist.csv
 학생들의 이름과 그에 대응하는 카드 UID를 적어놓은 파일입니다. column 0에는 카드 UID, column 1에는 학번, column 2에는 학생 이름이 저장되어 있습니다.
 아래는 예시 형식입니다.
@@ -48,10 +48,7 @@ loader.py 파일을 다운로드받고 적당한 위치에 저장한 다음, 터
 예시) `pip install getch`
 위에 적힌 모든 모듈에 대해 설치 명령어를 입력하십시오. 그런 다음 loader.py를 다시 시작합니다.
 
-다만, pyscard 모듈의 경우, `sudo apt install swig libpcsclite-dev pcscd` 명령어로 필요한 패키지를 설치한 다음 설치하십시오. 그렇지 않은 경우 빌드 과정에서 오류가 발생하여 정상적 이용이 불가능합니다.
-
-## No module names 'smartcard.CardType' 오류 발생
-일부 환경에서 pip으로 smartcard 모듈 설치 시 설치했음에도 인식되지 않는 경우가 있습니다. 이 경우 `sudo apt install python3-pyscard` 명령어로 smartcard와 pyscard를 같이 설치하십시오.
+대부분의 경우 지켜야 할 순서 없이 바로 설치가 가능하지만, pyscard 모듈의 경우, `sudo apt install swig libpcsclite-dev pcscd` 명령어로 필요한 패키지를 설치한 다음 설치하십시오. 그렇지 않은 경우 빌드 과정에서 오류가 발생하여 설치가 중단됩니다.
 
 ## loader 오류 발생 시
 이 Repository에서 loader.py를 수동으로 다운로드받고 파일을 교체하십시오.
@@ -69,6 +66,6 @@ sudo modprobe -b nfc
 ## 최초 실행 시 모듈 설치 이후 "No module named 'wget'" 오류 메시지가 표시됨
 다시 실행하면 정상적으로 진행됩니다. 현재 원인 조사 중에 있습니다.
 
-# 웹서버 시작 방법
+# 입퇴실 데이터를 볼 수 있는 웹서버를 구동하는 방법
 이 장에서는 기기에 저장된 입퇴실 기록을 보여주는 웹서버를 여는 방법에 대해 다룹니다.
 현재 작성 중에 있습니다.

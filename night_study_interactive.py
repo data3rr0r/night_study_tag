@@ -86,6 +86,7 @@ def check_student_and_record_entry_time(student_id):
         writer = csv.writer(file)
         writer.writerow(attendance_record)
     
+    os.system('cp attendance_history.csv /var/www/html/data')
     now_studying.append(student_id)
     print(f"{student_name}님, {current_time_kr}에 입실하셨습니다.")
     
@@ -127,6 +128,7 @@ def check_student_and_record_exit_time(student_id):
         writer = csv.writer(file)
         writer.writerow(attendance_record)
     
+    os.system('cp attendance_history.csv /var/www/html/data')
     now_studying.remove(student_id)
     print(f"{student_name}님, {current_time_kr}에 퇴실하셨습니다.")
     
