@@ -56,6 +56,7 @@ loader.py 파일을 다운로드받고 적당한 위치에 저장한 다음, 터
 ## Waiting For NFC-Card.. 메시지가 출력된 이후 카드를 인식시켜도 ID가 표시되지 않음
 Ubuntu 22.04에 기본적으로 설치된 시스템 모듈과 충돌이 발생하여 수동으로 제거해야 합니다. 터미널을 열고 다음 명령어를 순서대로 입력하십시오. 이렇게 하면 해당 시스템 모듈을 제거하고 다시 자동으로 사용하지 않도록 블랙리스트 처리합니다.
 ```
+printf 'blacklist pn533\nblacklist pn533_usb\nblacklist nfc\n' | sudo tee /etc/modprobe.d/blacklist-pn533.conf
 sudo modprobe -r pn533_usb
 sudo modprobe -r pn533
 sudo modprobe -r nfc

@@ -31,6 +31,14 @@ if not os.path.exists('.version'):
     os.system('git clone https://github.com/data3rr0r/night_study_tag_web')
     os.system('cp -r night_study_tag_web/* /var/www/html')
     os.system('sudo systemctl restart apache2')
+    printf("충돌 문제가 있는 모듈 비활성화 중...")
+    os.system("printf 'blacklist pn533\nblacklist pn533_usb\nblacklist nfc\n' | sudo tee /etc/modprobe.d/blacklist-pn533.conf")
+    os.system("sudo modprobe -r pn533_usb")
+    os.system("sudo modprobe -r pn533")
+    os.system("sudo modprobe -r nfc")
+    os.system("sudo modprobe -b pn533_usb")
+    os.system("sudo modprobe -b pn533")
+    os.system("sudo modprobe -b nfc")
 else:
     with open('.version', 'r') as f:
         local_version = float(f.read())
