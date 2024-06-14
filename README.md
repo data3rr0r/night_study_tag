@@ -38,20 +38,23 @@ loader.py 파일을 다운로드받고 적당한 위치에 저장한 다음, 터
 
 
 # 자주 묻는 질문/버그 해결법
+
 ## 최초 실행 시 일부 환경에서 loader가 자동으로 getch를 설치하는 도중 subprocess-exited-with-error 메시지가 표기됨
-터미널을 열고 `sudo apt install python3-dev` 명령어를 입력한 다음, `pip install getch` 명령어를 입력하여 수동으로 설치하십시오.
+터미널을 열고 `sudo apt install python3-dev` 명령어를 입력하여 python3-dev를 설치하고, 아래의 'Dependency 수동 설치 방법' 섹션의 지시에 따르십시오.
 
 ## Dependency 수동 설치 방법
-이 프로그램은 `getch, datetime, time, wget, nfc-uid, keyboard, pyscard,keyboard,packaging`모듈을 사용합니다. 
+이 프로그램은 `getch, datetime, time, wget, nfc-uid, keyboard, pyscard, keyboard,packaging`모듈을 사용합니다. 
 터미널을 열고 `pip install [모듈명]`을 입력하여 필요한 요소를 설치하십시오. 
 예시) `pip install getch`
 위에 적힌 모든 모듈에 대해 설치 명령어를 입력하십시오. 그런 다음 loader.py를 다시 시작합니다.
+
+다만, pyscard 모듈의 경우, `sudo apt install swig libpcsclite-dev pcscd` 명령어로 필요한 패키지를 설치한 다음 설치하십시오. 그렇지 않은 경우 빌드 과정에서 오류가 발생하여 정상적 이용이 불가능합니다.
 
 ## No module names 'smartcard.CardType' 오류 발생
 일부 환경에서 pip으로 smartcard 모듈 설치 시 설치했음에도 인식되지 않는 경우가 있습니다. 이 경우 `sudo apt install python3-pyscard` 명령어로 smartcard와 pyscard를 같이 설치하십시오.
 
 ## loader 오류 발생 시
-이 Repository에서 loader.py를 수동으로 다운로드받고 파일을 대치하십시오.
+이 Repository에서 loader.py를 수동으로 다운로드받고 파일을 교체하십시오.
 
 ## Waiting For NFC-Card.. 메시지가 출력된 이후 카드를 인식시켜도 ID가 표시되지 않음
 Ubuntu 22.04에 기본적으로 설치된 시스템 모듈과 충돌이 발생하여 수동으로 제거해야 합니다. 터미널을 열고 다음 명령어를 순서대로 입력하십시오. 이렇게 하면 해당 시스템 모듈을 제거하고 다시 자동으로 사용하지 않도록 블랙리스트 처리합니다.
@@ -65,4 +68,7 @@ sudo modprobe -b nfc
 ```
 ## 최초 실행 시 모듈 설치 이후 "No module named 'wget'" 오류 메시지가 표시됨
 다시 실행하면 정상적으로 진행됩니다. 현재 원인 조사 중에 있습니다.
+
 # 웹서버 시작 방법
+이 장에서는 기기에 저장된 입퇴실 기록을 보여주는 웹서버를 여는 방법에 대해 다룹니다.
+현재 작성 중에 있습니다.
