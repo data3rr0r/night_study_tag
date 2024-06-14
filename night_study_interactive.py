@@ -42,6 +42,7 @@ def mainscreen():
 
 def read_card():
     global student_id
+    os.system
     print("카드를 인식하세요.")
     nfc_userid = nfc_uid.NFC_UID()
     student_id = str(nfc_userid.read())
