@@ -44,6 +44,7 @@ if not os.path.exists('.version'):
     os.system("sudo modprobe -b pn533_usb")
     os.system("sudo modprobe -b pn533")
     os.system("sudo modprobe -b nfc")
+    os.system("sudo update-initramfs -u")
 else:
     with open('.version', 'r') as f:
         local_version = float(f.read())
