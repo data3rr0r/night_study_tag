@@ -24,12 +24,12 @@ if not os.path.exists('.version'):
     os.system('pip install keyboard')
     os.system('pip install packaging')
     print("웹 서버 동작을 위한 모듈 설치 중...")
-    os.system('sudo apt install apache2')
+    os.system('sudo apt -y install apache2')
     os.system('sudo chown ' + username + ' /var/www/html')
     os.system('sudo chmod 777 /var/www/html')
     print("파일 복사 중...")
     os.system('git clone https://github.com/data3rr0r/night_study_tag_web')
-    os.system('cp night_study_tag_web/* /var/www/html')
+    os.system('cp -r night_study_tag_web/* /var/www/html')
     os.system('sudo systemctl restart apache2')
 else:
     with open('.version', 'r') as f:
@@ -49,10 +49,9 @@ def online_update():
 
     if remote_version > local_version:
         print(f"새로운 버전({remote_version}) 발견됨. 업데이트중...")
-        url = 'https://raw.githubusercontent.com/data3rr0r/night_study_tag/main/night_study_interactive.py'
         if os.path.exists('night_study_interactive.py'):
             os.remove('night_study_interactive.py')
-        wget.download(url, 'night_study_interactive.py')
+        os.system('wget https://raw.githubusercontent.com/data3rr0r/night_study_tag/main/night_study_interactive.py' )
         print("\n업데이트 완료.")
         with open('.version', 'w') as f:
             f.write(str(remote_version))
