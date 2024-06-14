@@ -21,7 +21,6 @@ if not os.path.exists('.version'):
     os.system('sudo apt install -y libpcsclite-dev')
     os.system('sudo apt install -y pcscd')
     os.system('sudo apt install -y pcsc-tools')
-    os.system('sudo apt install -y nfc-list')
     os.system('pip install getch')
     os.system('pip install datetime')
     os.system('pip install wget')
