@@ -14,13 +14,13 @@ if not os.path.exists('.version'):
     local_version = float(0)
     print('최초 실행입니다. 비밀번호를 입력하여 프로그램에 실행한 라이브러리를 다운받으십시오. 인터넷 연결이 도중에 끊기지 않도록 안정적인 온라인 환경에서 진행하십시오.')
     os.system('sudo apt update')
-    os.system('sudo apt install -y python3-pip')
+    os.system('sudo apt install -y python3-pip swig libpcsclite-dev pcscd')
     os.system('pip install getch')
     os.system('pip install datetime')
-    os.system('pip install time')
     os.system('pip install wget')
     os.system('pip install nfc-uid')
     os.system('pip install keyboard')
+    os.system('pip install packaging')
 else:
     with open('.version', 'r') as f:
         local_version = float(f.read())

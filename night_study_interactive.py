@@ -45,7 +45,6 @@ def read_card():
     print("카드를 인식하세요.")
     nfc_userid = nfc_uid.NFC_UID()
     student_id = str(nfc_userid.read())
-    del nfc_userid
     return student_id
 
 
