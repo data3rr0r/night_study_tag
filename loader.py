@@ -31,7 +31,7 @@ if not os.path.exists('.version'):
     os.system('pip install pyscard')
     print("웹 서버 동작을 위한 모듈 설치 중...")
     os.system('sudo apt -y install apache2')
-    os.system('sudo chown ' + username + ' /var/www/html')
+    os.system('sudo chown ' + username + ' -R /var/www/html')
     print("파일 복사 중...")
     os.system('git clone https://github.com/data3rr0r/night_study_tag_web')
     os.system('sudo cp -r night_study_tag_web/* /var/www/html')
